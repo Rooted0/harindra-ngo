@@ -1,3 +1,3 @@
 const UPI_CONFIG = {
-    upiId: "harindra@axl"
+    upiId: "rootedb@axl"
 };
