@@ -109,7 +109,7 @@ nav a {
     transition: all 0.3s ease;
 }
 
-nav a:hover {
+nav a:hover, nav a.active {
     background-color: var(--primary);
     color: var(--white);
     box-shadow: 0 0 15px var(--glow);

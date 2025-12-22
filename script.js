@@ -93,16 +93,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Smooth Scroll for links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    const navLinks = document.querySelectorAll('nav ul li a');
+    
+    navLinks.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active class immediately on click
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+
                 navMenu.classList.remove('active');
                 menuIcon.classList.add('fa-bars');
                 menuIcon.classList.remove('fa-times');
             }
         });
     });
+
+    // Scroll Spy Logic
+    const sections = document.querySelectorAll('section[id]');
+    
+    function scrollSpy() {
+        const scrollY = window.pageYOffset;
+        
+        sections.forEach(current => {
+            const sectionHeight = current.offsetHeight;
+            const sectionTop = current.offsetTop - 100; // Offset for header
+            const sectionId = current.getAttribute('id');
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                document.querySelector(`nav ul li a[href*=${sectionId}]`)?.classList.add('active');
+            } else {
+                document.querySelector(`nav ul li a[href*=${sectionId}]`)?.classList.remove('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', scrollSpy);
+    // Run once on load to set initial active state
+    scrollSpy();
 });
