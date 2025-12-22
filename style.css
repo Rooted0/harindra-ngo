@@ -440,6 +440,8 @@ footer {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
+        position: relative;
+        z-index: 1100;
     }
 
     nav {
@@ -452,6 +454,7 @@ footer {
         padding: 100px 30px;
         transition: 0.3s;
         box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        z-index: 1050;
     }
 
     nav.active {
