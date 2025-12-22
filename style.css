@@ -454,6 +454,21 @@ footer {
         box-shadow: var(--shadow);
     }
 
+    .theme-btn {
+        position: fixed;
+        top: 20px;
+        right: 75px;
+        z-index: 2000;
+        background: var(--bg-main);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
     nav {
         position: fixed;
         top: 0;
