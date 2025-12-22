@@ -440,21 +440,31 @@ footer {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
-        position: relative;
-        z-index: 1100;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 2000;
+        background: var(--bg-main);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
     }
 
     nav {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 50%;
+        width: 70%;
         height: 100vh;
         background: var(--bg-main);
         padding: 100px 30px;
-        transition: 0.3s;
-        box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-        z-index: 1050;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+        z-index: 1500;
     }
 
     nav.active {

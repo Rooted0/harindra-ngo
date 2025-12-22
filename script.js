@@ -92,9 +92,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth Scroll for links
+    // Scroll Spy Logic using IntersectionObserver
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav ul li a');
-    
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach(section => observer.observe(section));
+
+    // Smooth Scroll for links
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -102,11 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.querySelector(targetId);
             
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-                
-                // Update active class immediately on click
-                navLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
 
                 navMenu.classList.remove('active');
                 menuIcon.classList.add('fa-bars');
@@ -114,27 +142,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Scroll Spy Logic
-    const sections = document.querySelectorAll('section[id]');
-    
-    function scrollSpy() {
-        const scrollY = window.pageYOffset;
-        
-        sections.forEach(current => {
-            const sectionHeight = current.offsetHeight;
-            const sectionTop = current.offsetTop - 100; // Offset for header
-            const sectionId = current.getAttribute('id');
-            
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                document.querySelector(`nav ul li a[href*=${sectionId}]`)?.classList.add('active');
-            } else {
-                document.querySelector(`nav ul li a[href*=${sectionId}]`)?.classList.remove('active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', scrollSpy);
-    // Run once on load to set initial active state
-    scrollSpy();
 });
