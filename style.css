@@ -340,26 +340,15 @@ footer {
     margin-bottom: 50px;
 }
 
-.footer-links ul {
-    list-style: none;
+.footer-info .logo {
+    justify-content: center;
+    margin-bottom: 15px;
 }
 
-.footer-links a {
-    text-decoration: none;
+.footer-info p {
     color: var(--text-muted);
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: var(--primary);
-}
-
-.footer-contact p {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-muted);
-    margin-bottom: 10px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .footer-bottom {
